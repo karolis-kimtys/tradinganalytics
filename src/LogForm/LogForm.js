@@ -66,7 +66,7 @@ export default class LogForm extends Component {
 
     this.state = {
       instrument: "",
-      interval: 0,
+      interval: "",
     };
   }
 
@@ -106,28 +106,30 @@ export default class LogForm extends Component {
         <Wrapper>
           <LabelField>Instrument: </LabelField>
           <SelectField
-            useref='userInput'
             required
             value={this.state.instrument}
             onChange={this.onChangeInstrument}
           >
-            <option value='----'>-----</option>
-            <option value='EURCHF'>EUR/CHF</option>
-            <option value='EURUSD'>EUR/USD</option>
-            <option value='USDGBP'>USD/GBP</option>
+            <option></option>
+            <option value='EURCHF' key='EURCHF'>
+              EURCHF
+            </option>
+            <option value='EURUSD'>EURUSD</option>
+            <option value='USDGBP'>USDGBP</option>
           </SelectField>
         </Wrapper>
 
         <Wrapper>
           <LabelField>Interval: </LabelField>
           <SelectField
-            useref='userInput'
             required
             value={this.state.interval}
             onChange={this.onChangeInterval}
           >
-            <option value='-----'>-----</option>
-            <option value='15'>15min</option>
+            <option></option>
+            <option value='15' key='15'>
+              15min
+            </option>
             <option value='60'>60min</option>
             <option value='240'>4h</option>
           </SelectField>
