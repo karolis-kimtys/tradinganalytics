@@ -62,10 +62,11 @@ export default class LogForm extends Component {
 
     this.onChangeInstrument = this.onChangeInstrument.bind(this);
     this.onChangeInterval = this.onChangeInterval.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       instrument: "",
-      interval: "",
+      interval: 0,
     };
   }
 
@@ -88,22 +89,24 @@ export default class LogForm extends Component {
       interval: this.state.interval,
     };
 
+    console.log("HELLOOO");
     console.log(trade);
 
     axios
       .post("https://personal-mongo.herokuapp.com/trades/add", trade)
       .then((res) => console.log(res.data));
+    window.location = "/";
   }
 
   render() {
     return (
-      <LogSection>
+      <LogSection onSubmit={this.onSubmit}>
         <Title>Log Trade Data</Title>
 
         <Wrapper>
           <LabelField>Instrument: </LabelField>
-          <SelectField
-            type='text'
+          <select
+            useref='userInput'
             required
             value={this.state.instrument}
             onChange={this.onChangeInstrument}
@@ -112,13 +115,13 @@ export default class LogForm extends Component {
             <option value='EURCHF'>EUR/CHF</option>
             <option value='EURUSD'>EUR/USD</option>
             <option value='USDGBP'>USD/GBP</option>
-          </SelectField>
+          </select>
         </Wrapper>
 
         <Wrapper>
           <LabelField>Interval: </LabelField>
-          <SelectField
-            type='text'
+          <select
+            useref='userInput'
             required
             value={this.state.interval}
             onChange={this.onChangeInterval}
@@ -127,7 +130,7 @@ export default class LogForm extends Component {
             <option value='15'>15min</option>
             <option value='60'>60min</option>
             <option value='240'>4h</option>
-          </SelectField>
+          </select>
         </Wrapper>
 
         <Wrapper>
