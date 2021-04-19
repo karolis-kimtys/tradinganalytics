@@ -135,7 +135,7 @@ export default class LogForm extends Component {
           </SelectField>
         </Wrapper>
 
-        <Wrapper>
+        {/* <Wrapper>
           <LabelField>System: </LabelField>
           <SelectField>
             <option value='blank'>-----</option>
@@ -143,9 +143,9 @@ export default class LogForm extends Component {
             <option value='Bat'>Bat</option>
             <option value='Gartley'>Gartley</option>
           </SelectField>
-        </Wrapper>
+        </Wrapper> */}
 
-        <Wrapper>
+        {/* <Wrapper>
           <LabelField>Entry: </LabelField>
           <SelectField>
             <option value='-----'>-----</option>
@@ -237,7 +237,7 @@ export default class LogForm extends Component {
         <Wrapper>
           <LabelField>A Price: </LabelField>
           <InputField type='number' />
-        </Wrapper>
+        </Wrapper> */}
 
         <br />
 
