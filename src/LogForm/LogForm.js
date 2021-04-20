@@ -93,7 +93,7 @@ export default class LogForm extends Component {
     console.log(trade);
 
     axios
-      .post("https://personal-mongo.herokuapp.com/trades/addtrade", trade)
+      .post("https://personal-mongo.herokuapp.com/trades/add", trade)
       .then((res) => console.log(res.data));
     window.location = "/";
   }
