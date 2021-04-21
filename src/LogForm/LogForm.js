@@ -62,6 +62,15 @@ export default class LogForm extends Component {
 
     this.onChangeInstrument = this.onChangeInstrument.bind(this);
     this.onChangeInterval = this.onChangeInterval.bind(this);
+    this.onChangeSystem = this.onChangeSystem.bind(this);
+    this.onChangeEntry = this.onChangeEntry.bind(this);
+    this.onChangeEntryDate = this.onChangeEntryDate.bind(this);
+    this.onChangeEntryTime = this.onChangeEntryTime.bind(this);
+    this.onChangeEntryPrice = this.onChangeEntryPrice.bind(this);
+    this.onChangeTarget1 = this.onChangeTarget1.bind(this);
+    this.onChangeTarget2 = this.onChangeTarget2.bind(this);
+    this.onChangeTarget3 = this.onChangeTarget3.bind(this);
+    this.onChangeStopLoss = this.onChangeStopLoss.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -82,20 +91,73 @@ export default class LogForm extends Component {
     });
   }
 
+  onChangeSystem(e) {
+    this.setState({
+      system: e.target.value,
+    });
+  }
+
+  onChangeEntry(e) {
+    this.setState({
+      entry: e.target.value,
+    });
+  }
+
+  onChangeEntryDate(e) {
+    this.setState({
+      entryDate: e.target.value,
+    });
+  }
+
+  onChangeEntryTime(e) {
+    this.setState({
+      entryTime: e.target.value,
+    });
+  }
+
+  onChangeEntryPrice(e) {
+    this.setState({
+      entryPrice: e.target.value,
+    });
+  }
+
+  onChangeTarget1(e) {
+    this.setState({
+      entryTarget1: e.target.value,
+    });
+  }
+
+  onChangeTarget2(e) {
+    this.setState({
+      entryTarget2: e.target.value,
+    });
+  }
+
+  onChangeTarget3(e) {
+    this.setState({
+      entryTarget3: e.target.value,
+    });
+  }
+
+  onChangeStopLoss(e) {
+    this.setState({
+      stopLoss: e.target.value,
+    });
+  }
+
   onSubmit(e) {
     e.preventDefault();
     const trade = {
       instrument: this.state.instrument,
       interval: this.state.interval,
+      system: this.state.system,
     };
-
-    console.log("HELLOOO");
-    console.log(trade);
-
+    console.log("Trade submitted - " + trade);
     axios
       .post("https://personal-mongo.herokuapp.com/trades/add", trade)
-      .then((res) => console.log(res.data));
-    window.location = "/";
+      // .post("http://localhost:5000/trades/add", trade)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log("Error caught in promise - " + err));
   }
 
   render() {
@@ -111,9 +173,7 @@ export default class LogForm extends Component {
             onChange={this.onChangeInstrument}
           >
             <option></option>
-            <option value='EURCHF' key='EURCHF'>
-              EURCHF
-            </option>
+            <option value='EURCHF'>EURCHF</option>
             <option value='EURUSD'>EURUSD</option>
             <option value='USDGBP'>USDGBP</option>
           </SelectField>
@@ -127,27 +187,29 @@ export default class LogForm extends Component {
             onChange={this.onChangeInterval}
           >
             <option></option>
-            <option value='15' key='15'>
-              15min
-            </option>
+            <option value='15'>15min</option>
             <option value='60'>60min</option>
             <option value='240'>4h</option>
           </SelectField>
         </Wrapper>
 
-        {/* <Wrapper>
+        <Wrapper>
           <LabelField>System: </LabelField>
-          <SelectField>
+          <SelectField
+            required
+            value={this.state.system}
+            onChange={this.onChangeSystem}
+          >
             <option value='blank'>-----</option>
             <option value='Cypher'>Cypher</option>
             <option value='Bat'>Bat</option>
             <option value='Gartley'>Gartley</option>
           </SelectField>
-        </Wrapper> */}
+        </Wrapper>
 
-        {/* <Wrapper>
+        <Wrapper>
           <LabelField>Entry: </LabelField>
-          <SelectField>
+          <SelectField value={this.state.entry} onChange={this.onChangeEntry}>
             <option value='-----'>-----</option>
             <option style={{ backgroundColor: "green" }} value='Long'>
               Long
@@ -161,38 +223,70 @@ export default class LogForm extends Component {
         <br />
 
         <Wrapper>
-          <LabelField>Entry Date: </LabelField>
-          <InputField type='date' id='start' name='trip-start' />
+          <LabelField>Entry Date:</LabelField>
+          <InputField
+            type='date'
+            id='start'
+            name='trip-start'
+            value={this.state.entryDate}
+            onChange={this.onChangeEntryDate}
+          />
         </Wrapper>
 
         <Wrapper>
-          <LabelField>Entry Time: </LabelField>
-          <InputField type='time' id='start' name='trip-start' />
+          <LabelField v>Entry Time:</LabelField>
+          <InputField
+            type='time'
+            id='start'
+            name='trip-start'
+            value={this.state.entryTime}
+            onChange={this.onChangeEntryTime}
+          />
         </Wrapper>
 
         <Wrapper>
           <LabelField>Entry Price: </LabelField>
-          <InputField type='number' />
+          <InputField
+            type='number'
+            value={this.state.entryPrice}
+            onChange={this.onChangeEntryPrice}
+          />
         </Wrapper>
 
         <Wrapper>
           <LabelField>Entry T1 Price: </LabelField>
-          <InputField type='number' />
+          <InputField
+            type='number'
+            value={this.state.entryTarget1}
+            onChange={this.onChangeTarget1}
+          />
         </Wrapper>
 
         <Wrapper>
           <LabelField>Entry T2 Price: </LabelField>
-          <InputField type='number' />
+          <InputField
+            type='number'
+            value={this.state.entryTarget2}
+            onChange={this.onChangeTarget2}
+          />
         </Wrapper>
 
         <Wrapper>
           <LabelField>Entry T3 Price: </LabelField>
-          <InputField type='number' />
+          <InputField
+            type='number'
+            value={this.state.entryTarget3}
+            onChange={this.onChangeTarget3}
+          />
         </Wrapper>
 
         <Wrapper>
           <LabelField>S/L Price: </LabelField>
-          <InputField type='number' />
+          <InputField
+            type='number'
+            value={this.state.stopLoss}
+            onChange={this.onChangeStopLoss}
+          />
         </Wrapper>
 
         <br />
@@ -237,7 +331,7 @@ export default class LogForm extends Component {
         <Wrapper>
           <LabelField>A Price: </LabelField>
           <InputField type='number' />
-        </Wrapper> */}
+        </Wrapper>
 
         <br />
 
