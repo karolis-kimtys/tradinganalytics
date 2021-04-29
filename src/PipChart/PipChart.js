@@ -49,10 +49,9 @@ export default function TotalTrades() {
     item.Entry === "LONG" ? (totalT2 += t2) : (totalT2 -= t2);
     item.Entry === "LONG" ? (totalT3 += t3) : (totalT3 -= t3);
 
-    let pushPip =
-      item.Entry === "LONG"
-        ? (totalPip = totalPip + t1 + t2 + t3)
-        : (totalPip = totalPip - t1 - t2 - t3);
+    item.Entry === "LONG"
+      ? (totalPip = totalPip + t1 + t2 + t3)
+      : (totalPip = totalPip - t1 - t2 - t3);
 
     trace.push(key);
     totals.push(t1 + t2 + t3);
