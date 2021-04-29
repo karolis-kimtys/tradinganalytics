@@ -1,0 +1,112 @@
+form {
+  z-index: 100;
+  min-width: 300px;
+  max-width: 300px;
+  height: 100vh;
+  background-color: rgb(51, 51, 51);
+  font-weight: 500;
+}
+
+section {
+  margin-left: 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h1 {
+  padding: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  color: #9c9c9c;
+}
+
+label {
+  padding: 2px;
+  font-size: 1.25rem;
+  color: #c3c3c3;
+}
+
+select {
+  margin-right: 25px;
+  width: 100px;
+  height: 2rem;
+  font-size: 1.25rem;
+  background-color: #c3c3c3;
+  border: none;
+  appearance: none;
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-duration: 0.5s;
+}
+
+input {
+  margin-right: 25px;
+  width: 100px;
+  height: 2rem;
+  font-size: 1.25rem;
+  background-color: #c3c3c3;
+  font-family: "Fira Code", monospace;
+  border: none;
+  appearance: none;
+  text-align: center;
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-duration: 0.5s;
+}
+
+input:focus,
+input:hover,
+select:focus,
+select:hover {
+  background-color: #e2e2e2;
+  transform: scale(1.01);
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-duration: 0.5s;
+}
+
+.Button {
+  background-color: mediumseagreen;
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-duration: 0.5s;
+}
+
+.Button:hover {
+  background-color: chartreuse;
+  transform: scale(1.01);
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-duration: 0.5s;
+}
+
+.DatePicker input,
+.TimePicker input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  margin: 2px;
+  margin-right: 25px;
+  background-color: #c3c3c3;
+  height: 2rem;
+  font-size: 1.25rem;
+  background-color: #c3c3c3;
+  border: none;
+  appearance: none;
+}
+
+.Long {
+  background-color: mediumseagreen;
+}
+
+.short {
+  background-color: crimson;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}

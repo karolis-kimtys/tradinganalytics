@@ -1,60 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import styled from "styled-components";
-
-const LogSection = styled.form`
-  min-width: 300px;
-  max-width: 300px;
-  height: 100vh;
-  background-color: rgb(51, 51, 51);
-`;
-
-const Wrapper = styled.section`
-  margin-left: 25px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const Title = styled.h1`
-  padding: 1rem;
-  font-size: 2rem;
-  font-weight: 700;
-  text-align: center;
-  color: #9c9c9c;
-`;
-
-const LabelField = styled.label`
-  padding: 5px;
-  font-size: 1.5rem;
-  color: #c3c3c3;
-`;
-
-const SelectField = styled.select`
-  margin-right: 25px;
-  width: 100px;
-  height: 2rem;
-  font-size: 1.25rem;
-  background-color: #c3c3c3;
-  font-family: "Fira Code", monospace;
-  border: none;
-  appearance: none;
-  option {
-    font-family: "Fira Code", monospace;
-  }
-`;
-
-const InputField = styled.input`
-  margin-right: 25px;
-  width: 100px;
-  height: 2rem;
-  font-size: 1.25rem;
-  background-color: #c3c3c3;
-  font-family: "Fira Code", monospace;
-  border: none;
-  appearance: none;
-`;
+import styles from "./LogForm.module.scss";
 
 export default class LogForm extends Component {
   constructor(props) {
@@ -71,12 +17,47 @@ export default class LogForm extends Component {
     this.onChangeTarget2 = this.onChangeTarget2.bind(this);
     this.onChangeTarget3 = this.onChangeTarget3.bind(this);
     this.onChangeStopLoss = this.onChangeStopLoss.bind(this);
+    this.onChangeExitDate = this.onChangeExitDate.bind(this);
+    this.onChangeExitTime = this.onChangeExitTime.bind(this);
+    this.onChangeExitTarget1 = this.onChangeExitTarget1.bind(this);
+    this.onChangeExitTarget2 = this.onChangeExitTarget2.bind(this);
+    this.onChangeExitTarget3 = this.onChangeExitTarget3.bind(this);
+    this.onChangeMAE = this.onChangeMAE.bind(this);
+    this.onChangePointX = this.onChangePointX.bind(this);
+    this.onChangePointA = this.onChangePointA.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onSubmitted = this.onSubmitted.bind(this);
 
     this.state = {
       instrument: "",
       interval: "",
+      system: "",
+      entry: "",
+      entryDate: "",
+      entryTime: "",
+      entryPrice: "",
+      entryTarget1: "",
+      entryTarget2: "",
+      entryTarget3: "",
+      stopLoss: "",
+
+      exitDate: "",
+      exitTime: "",
+      exitTarget1: "",
+      exitTarget2: "",
+      exitTarget3: "",
+      MAE: "",
+      pointX: "",
+      pointA: "",
+
+      submitted: "Waiting",
     };
+  }
+
+  onSubmitted() {
+    this.setState({
+      submitted: "Trade submitted.",
+    });
   }
 
   onChangeInstrument(e) {
@@ -145,29 +126,98 @@ export default class LogForm extends Component {
     });
   }
 
+  onChangeExitDate(e) {
+    this.setState({
+      exitDate: e.target.value,
+    });
+  }
+
+  onChangeExitTime(e) {
+    this.setState({
+      exitTime: e.target.value,
+    });
+  }
+
+  onChangeExitTarget1(e) {
+    this.setState({
+      exitTarget1: e.target.value,
+    });
+  }
+
+  onChangeExitTarget2(e) {
+    this.setState({
+      exitTarget2: e.target.value,
+    });
+  }
+
+  onChangeExitTarget3(e) {
+    this.setState({
+      exitTarget3: e.target.value,
+    });
+  }
+
+  onChangeMAE(e) {
+    this.setState({
+      MAE: e.target.value,
+    });
+  }
+
+  onChangePointX(e) {
+    this.setState({
+      pointX: e.target.value,
+    });
+  }
+
+  onChangePointA(e) {
+    this.setState({
+      pointA: e.target.value,
+    });
+  }
+
   onSubmit(e) {
     e.preventDefault();
     const trade = {
       instrument: this.state.instrument,
       interval: this.state.interval,
       system: this.state.system,
+      entry: this.state.entry,
+
+      entryDate: this.state.entryDate,
+      entryTime: this.state.entryTime,
+      entryPrice: this.state.entryPrice,
+      entryTarget1: this.state.entryTarget1,
+      entryTarget2: this.state.entryTarget2,
+      entryTarget3: this.state.entryTarget3,
+      stopLoss: this.state.stopLoss,
+
+      exitDate: this.state.exitDate,
+      exitTime: this.state.exitTime,
+      exitTarget1: this.state.exitTarget1,
+      exitTarget2: this.state.exitTarget2,
+      exitTarget3: this.state.exitTarget3,
+
+      MAE: this.state.MAE,
+      pointX: this.state.pointX,
+      pointA: this.state.pointA,
     };
-    console.log("Trade submitted - " + trade);
+
+    console.log("Trade is being submitted - ", trade);
     axios
-      .post("https://personal-mongo.herokuapp.com/trades/add", trade)
-      // .post("http://localhost:5000/trades/add", trade)
+      // .post("https://personal-mongo.herokuapp.com/trades/add", trade)
+      .post("http://localhost:5000/trades/add", trade)
       .then((res) => console.log(res.data))
       .catch((err) => console.log("Error caught in promise - " + err));
   }
 
   render() {
     return (
-      <LogSection onSubmit={this.onSubmit}>
-        <Title>Log Trade Data</Title>
+      <form onSubmit={this.onSubmit}>
+        <h1>Log Trade Data</h1>
 
-        <Wrapper>
-          <LabelField>Instrument: </LabelField>
-          <SelectField
+        <section>
+          <label>Instrument: </label>
+
+          <select
             required
             value={this.state.instrument}
             onChange={this.onChangeInstrument}
@@ -176,12 +226,12 @@ export default class LogForm extends Component {
             <option value='EURCHF'>EURCHF</option>
             <option value='EURUSD'>EURUSD</option>
             <option value='USDGBP'>USDGBP</option>
-          </SelectField>
-        </Wrapper>
+          </select>
+        </section>
 
-        <Wrapper>
-          <LabelField>Interval: </LabelField>
-          <SelectField
+        <section>
+          <label>Interval: </label>
+          <select
             required
             value={this.state.interval}
             onChange={this.onChangeInterval}
@@ -190,156 +240,224 @@ export default class LogForm extends Component {
             <option value='15'>15min</option>
             <option value='60'>60min</option>
             <option value='240'>4h</option>
-          </SelectField>
-        </Wrapper>
+          </select>
+        </section>
 
-        <Wrapper>
-          <LabelField>System: </LabelField>
-          <SelectField
+        <section>
+          <label>System: </label>
+          <select
             required
             value={this.state.system}
             onChange={this.onChangeSystem}
           >
-            <option value='blank'>-----</option>
+            <option></option>
             <option value='Cypher'>Cypher</option>
             <option value='Bat'>Bat</option>
             <option value='Gartley'>Gartley</option>
-          </SelectField>
-        </Wrapper>
+          </select>
+        </section>
 
-        <Wrapper>
-          <LabelField>Entry: </LabelField>
-          <SelectField value={this.state.entry} onChange={this.onChangeEntry}>
-            <option value='-----'>-----</option>
-            <option style={{ backgroundColor: "green" }} value='Long'>
+        <section>
+          <label>Entry: </label>
+          <select
+            required
+            value={this.state.entry}
+            onChange={this.onChangeEntry}
+            style={{
+              backgroundColor:
+                this.state.entry === ""
+                  ? "#c3c3c3"
+                  : this.state.entry === "Long"
+                  ? "mediumseagreen"
+                  : "crimson",
+            }}
+          >
+            <option></option>
+            <option value='Long' className={styles.Long}>
               Long
             </option>
-            <option style={{ backgroundColor: "red" }} value='Short'>
+            <option value='Short' className={styles.short}>
               Short
             </option>
-          </SelectField>
-        </Wrapper>
+          </select>
+        </section>
 
         <br />
 
-        <Wrapper>
-          <LabelField>Entry Date:</LabelField>
-          <InputField
-            type='date'
-            id='start'
-            name='trip-start'
-            value={this.state.entryDate}
-            onChange={this.onChangeEntryDate}
-          />
-        </Wrapper>
+        <section>
+          <label>Entry Date:</label>
+          <div className={styles.DatePicker}>
+            <input
+              type='date'
+              required
+              onChange={this.onChangeEntryDate}
+              value={this.state.entryDate}
+            />
+          </div>
+        </section>
 
-        <Wrapper>
-          <LabelField v>Entry Time:</LabelField>
-          <InputField
-            type='time'
-            id='start'
-            name='trip-start'
-            value={this.state.entryTime}
-            onChange={this.onChangeEntryTime}
-          />
-        </Wrapper>
+        <section>
+          <label v>Entry Time:</label>
+          <div className={styles.TimePicker}>
+            <input
+              type='time'
+              required
+              value={this.state.entryTime}
+              onChange={this.onChangeEntryTime}
+            />
+          </div>
+        </section>
 
-        <Wrapper>
-          <LabelField>Entry Price: </LabelField>
-          <InputField
+        <section>
+          <label>Entry Price: </label>
+          <input
             type='number'
+            required
             value={this.state.entryPrice}
             onChange={this.onChangeEntryPrice}
           />
-        </Wrapper>
+        </section>
 
-        <Wrapper>
-          <LabelField>Entry T1 Price: </LabelField>
-          <InputField
+        <section>
+          <label>Entry T1 Price: </label>
+          <input
             type='number'
+            required
             value={this.state.entryTarget1}
             onChange={this.onChangeTarget1}
           />
-        </Wrapper>
+        </section>
 
-        <Wrapper>
-          <LabelField>Entry T2 Price: </LabelField>
-          <InputField
+        <section>
+          <label>Entry T2 Price: </label>
+          <input
             type='number'
+            required
             value={this.state.entryTarget2}
             onChange={this.onChangeTarget2}
           />
-        </Wrapper>
+        </section>
 
-        <Wrapper>
-          <LabelField>Entry T3 Price: </LabelField>
-          <InputField
+        <section>
+          <label>Entry T3 Price: </label>
+          <input
             type='number'
+            required
             value={this.state.entryTarget3}
             onChange={this.onChangeTarget3}
           />
-        </Wrapper>
+        </section>
 
-        <Wrapper>
-          <LabelField>S/L Price: </LabelField>
-          <InputField
+        <section>
+          <label>S/L Price: </label>
+          <input
             type='number'
+            required
             value={this.state.stopLoss}
             onChange={this.onChangeStopLoss}
           />
-        </Wrapper>
+        </section>
 
         <br />
 
-        <Wrapper>
-          <LabelField>Exit Date: </LabelField>
-          <InputField type='date' id='start' name='trip-start' />
-        </Wrapper>
+        <section>
+          <label>Exit Date: </label>
+          <div className={styles.DatePicker}>
+            <input
+              type='date'
+              required
+              value={this.state.exitDate}
+              onChange={this.onChangeExitDate}
+            />
+          </div>
+        </section>
 
-        <Wrapper>
-          <LabelField>Exit Time: </LabelField>
-          <InputField type='time' id='start' name='trip-start' />
-        </Wrapper>
+        <section>
+          <label>Exit Time: </label>
+          <div className={styles.TimePicker}>
+            <input
+              type='time'
+              required
+              value={this.state.exitTime}
+              onChange={this.onChangeExitTime}
+            />
+          </div>
+        </section>
 
-        <Wrapper>
-          <LabelField>Exit T1 Price: </LabelField>
-          <InputField type='number' />
-        </Wrapper>
+        <section>
+          <label>Exit T1 Price: </label>
+          <input
+            type='number'
+            required
+            value={this.state.exitTarget1}
+            onChange={this.onChangeExitTarget1}
+          />
+        </section>
 
-        <Wrapper>
-          <LabelField>Exit T2 Price: </LabelField>
-          <InputField type='number' />
-        </Wrapper>
+        <section>
+          <label>Exit T2 Price: </label>
+          <input
+            type='number'
+            required
+            value={this.state.exitTarget2}
+            onChange={this.onChangeExitTarget2}
+          />
+        </section>
 
-        <Wrapper>
-          <LabelField>Exit T3 Price: </LabelField>
-          <InputField type='number' />
-        </Wrapper>
+        <section>
+          <label>Exit T3 Price: </label>
+          <input
+            type='number'
+            required
+            value={this.state.exitTarget3}
+            onChange={this.onChangeExitTarget3}
+          />
+        </section>
 
         <br />
 
-        <Wrapper>
-          <LabelField>MAE: </LabelField>
-          <InputField type='number' />
-        </Wrapper>
+        <section>
+          <label>MAE: </label>
+          <input
+            type='number'
+            required
+            value={this.state.MAE}
+            onChange={this.onChangeMAE}
+          />
+        </section>
 
-        <Wrapper>
-          <LabelField>X Price: </LabelField>
-          <InputField type='number' />
-        </Wrapper>
+        <section>
+          <label>X Price: </label>
+          <input
+            type='number'
+            required
+            value={this.state.pointX}
+            onChange={this.onChangePointX}
+          />
+        </section>
 
-        <Wrapper>
-          <LabelField>A Price: </LabelField>
-          <InputField type='number' />
-        </Wrapper>
+        <section>
+          <label>A Price: </label>
+          <input
+            type='number'
+            required
+            value={this.state.pointA}
+            onChange={this.onChangePointA}
+          />
+        </section>
 
         <br />
 
-        <Wrapper>
-          <LabelField>---------------</LabelField>
-          <InputField type='submit' value='Submit' />
-        </Wrapper>
-      </LogSection>
+        <section>
+          <label></label>
+          <input
+            className={styles.Button}
+            type='submit'
+            value='Submit'
+            onChange={this.onSubmit}
+          />
+        </section>
+      </form>
     );
   }
 }

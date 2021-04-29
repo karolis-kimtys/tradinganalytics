@@ -1,0 +1,82 @@
+.Wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+table {
+  height: 50vh;
+  z-index: 10;
+  border-collapse: collapse;
+  display: block;
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-align: center;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  font-weight: 500;
+}
+
+.Header {
+  background-color: rgb(51, 51, 51);
+  border-collapse: collapse;
+  color: #9c9c9c;
+  font-size: 1.2rem;
+  top: 0;
+  position: sticky;
+}
+
+tr,
+th,
+td {
+  padding: 5px;
+  border-collapse: collapse;
+}
+
+td {
+  border: 1px solid black;
+  color: black;
+}
+
+.TableButton {
+  width: 100px;
+  height: 25px;
+  background-color: rgb(51, 51, 51);
+  color: mediumseagreen;
+  border: none;
+  border-radius: 0 15px 0 0;
+  z-index: 120;
+  font-size: 1.2rem;
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-duration: 0.5s;
+}
+
+.RefreshButton {
+  width: 100px;
+  height: 25px;
+  background-color: rgb(51, 51, 51);
+  color: mediumseagreen;
+  border: none;
+  border-radius: 15px 15px 0 0;
+  z-index: 120;
+  font-size: 1.2rem;
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-duration: 0.5s;
+}
+
+.TableButton:hover,
+.RefreshButton:hover {
+  background-color: rgb(26, 26, 26);
+  font-weight: 800;
+  transition: ease-out;
+  transition-duration: 0.5s;
+}
+
+.Open {
+  transition-duration: 5s;
+}
+
+.Closed {
+  transition-duration: 5s;
+}
