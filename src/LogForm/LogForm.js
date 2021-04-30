@@ -203,8 +203,8 @@ export default class LogForm extends Component {
 
     console.log("Trade is being submitted - ", trade);
     axios
-      // .post("https://personal-mongo.herokuapp.com/trades/add", trade)
-      .post("http://localhost:5000/trades/add", trade)
+      .post("https://personal-mongo.herokuapp.com/trades/add", trade)
+      // .post("http://localhost:5000/trades/add", trade)
       .then((res) => console.log(res.data))
       .catch((err) => console.log("Error caught in promise - " + err));
   }

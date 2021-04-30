@@ -86,6 +86,10 @@ export default function TotalTrades() {
               colors: ultimateColors[0],
             },
             name: "Target 1 Pips",
+
+            frame: {
+              duration: 500,
+            },
           },
           {
             x: trace,
@@ -129,7 +133,7 @@ export default function TotalTrades() {
           paper_bgcolor: "transparent",
           width: 900,
           height: 500,
-          title: ``,
+          title: `Total Pips won ${totalPip.toFixed(1)}.`,
         }}
       />
     </div>

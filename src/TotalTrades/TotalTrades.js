@@ -24,7 +24,7 @@ export default function TotalTrades() {
     entryX.push(key);
     entryY.push(item.Entry);
     item.Entry === "LONG" ? (totalLong += 1) : (totalShort += 1);
-    return null
+    return null;
   });
 
   var ultimateColors = [
@@ -55,9 +55,8 @@ export default function TotalTrades() {
           paper_bgcolor: "transparent",
           width: 350,
           height: 300,
-          title: `Total of ${totalTrades} trades, ${totalLong} long & ${totalShort} trades`,
+          title: `${totalTrades} trades, ${totalLong} long & ${totalShort} short trades`,
         }}
-    
       />
     </div>
   );
