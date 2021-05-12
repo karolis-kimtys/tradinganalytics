@@ -1,4 +1,4 @@
-import "./App.css";
+import styles from "./App.module.scss";
 import LogForm from "./LogForm/LogForm";
 import TradesTable from "./TradesTable/TradesTable";
 import TotalTrades from "./TotalTrades/TotalTrades";
@@ -7,7 +7,7 @@ import PipChart from "./PipChart/PipChart";
 
 function App() {
   return (
-    <div className='App'>
+    <div className={styles.App}>
       <LogForm />
       <TradesTable />
       <TotalTrades />
