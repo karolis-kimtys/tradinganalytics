@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import axios from "axios";
-import styles from "./LogForm.module.scss";
+import React, { Component } from 'react';
+import axios from 'axios';
+import styles from './LogForm.module.scss';
 
 export default class LogForm extends Component {
   constructor(props) {
@@ -29,34 +29,34 @@ export default class LogForm extends Component {
     this.onSubmitted = this.onSubmitted.bind(this);
 
     this.state = {
-      instrument: "",
-      interval: "",
-      system: "",
-      entry: "",
-      entryDate: "",
-      entryTime: "",
-      entryPrice: "",
-      entryTarget1: "",
-      entryTarget2: "",
-      entryTarget3: "",
-      stopLoss: "",
+      instrument: '',
+      interval: '',
+      system: '',
+      entry: '',
+      entryDate: '',
+      entryTime: '',
+      entryPrice: '',
+      entryTarget1: '',
+      entryTarget2: '',
+      entryTarget3: '',
+      stopLoss: '',
 
-      exitDate: "",
-      exitTime: "",
-      exitTarget1: "",
-      exitTarget2: "",
-      exitTarget3: "",
-      MAE: "",
-      pointX: "",
-      pointA: "",
+      exitDate: '',
+      exitTime: '',
+      exitTarget1: '',
+      exitTarget2: '',
+      exitTarget3: '',
+      MAE: '',
+      pointX: '',
+      pointA: '',
 
-      submitted: "Waiting",
+      submitted: 'Waiting',
     };
   }
 
   onSubmitted() {
     this.setState({
-      submitted: "Trade submitted.",
+      submitted: 'Trade submitted.',
     });
   }
 
@@ -201,12 +201,12 @@ export default class LogForm extends Component {
       pointA: this.state.pointA,
     };
 
-    console.log("Trade is being submitted - ", trade);
+    console.log('Trade is being submitted - ', trade);
     axios
-      .post("https://personal-mongo.herokuapp.com/trades/add", trade)
+      .post('https://personal-mongo.herokuapp.com/trades/add', trade)
       // .post("http://localhost:5000/trades/add", trade)
       .then((res) => console.log(res.data))
-      .catch((err) => console.log("Error caught in promise - " + err));
+      .catch((err) => console.log('Error caught in promise - ' + err));
   }
 
   render() {
@@ -223,9 +223,9 @@ export default class LogForm extends Component {
             onChange={this.onChangeInstrument}
           >
             <option></option>
-            <option value='EURCHF'>EURCHF</option>
-            <option value='EURUSD'>EURUSD</option>
-            <option value='USDGBP'>USDGBP</option>
+            <option value="EURCHF">EURCHF</option>
+            <option value="EURUSD">EURUSD</option>
+            <option value="USDGBP">USDGBP</option>
           </select>
         </section>
 
@@ -237,9 +237,9 @@ export default class LogForm extends Component {
             onChange={this.onChangeInterval}
           >
             <option></option>
-            <option value='15'>15min</option>
-            <option value='60'>60min</option>
-            <option value='240'>4h</option>
+            <option value="15">15min</option>
+            <option value="60">60min</option>
+            <option value="240">4h</option>
           </select>
         </section>
 
@@ -251,9 +251,9 @@ export default class LogForm extends Component {
             onChange={this.onChangeSystem}
           >
             <option></option>
-            <option value='Cypher'>Cypher</option>
-            <option value='Bat'>Bat</option>
-            <option value='Gartley'>Gartley</option>
+            <option value="Cypher">Cypher</option>
+            <option value="Bat">Bat</option>
+            <option value="Gartley">Gartley</option>
           </select>
         </section>
 
@@ -265,18 +265,18 @@ export default class LogForm extends Component {
             onChange={this.onChangeEntry}
             style={{
               backgroundColor:
-                this.state.entry === ""
-                  ? "#c3c3c3"
-                  : this.state.entry === "Long"
-                  ? "mediumseagreen"
-                  : "crimson",
+                this.state.entry === ''
+                  ? '#c3c3c3'
+                  : this.state.entry === 'Long'
+                  ? 'mediumseagreen'
+                  : 'crimson',
             }}
           >
             <option></option>
-            <option value='Long' className={styles.Long}>
+            <option value="Long" className={styles.Long}>
               Long
             </option>
-            <option value='Short' className={styles.short}>
+            <option value="Short" className={styles.short}>
               Short
             </option>
           </select>
@@ -288,7 +288,7 @@ export default class LogForm extends Component {
           <label>Entry Date:</label>
           <div className={styles.DatePicker}>
             <input
-              type='date'
+              type="date"
               required
               onChange={this.onChangeEntryDate}
               value={this.state.entryDate}
@@ -300,7 +300,7 @@ export default class LogForm extends Component {
           <label v>Entry Time:</label>
           <div className={styles.TimePicker}>
             <input
-              type='time'
+              type="time"
               required
               value={this.state.entryTime}
               onChange={this.onChangeEntryTime}
@@ -311,7 +311,7 @@ export default class LogForm extends Component {
         <section>
           <label>Entry Price: </label>
           <input
-            type='number'
+            type="number"
             required
             value={this.state.entryPrice}
             onChange={this.onChangeEntryPrice}
@@ -321,7 +321,7 @@ export default class LogForm extends Component {
         <section>
           <label>Entry T1 Price: </label>
           <input
-            type='number'
+            type="number"
             required
             value={this.state.entryTarget1}
             onChange={this.onChangeTarget1}
@@ -331,7 +331,7 @@ export default class LogForm extends Component {
         <section>
           <label>Entry T2 Price: </label>
           <input
-            type='number'
+            type="number"
             required
             value={this.state.entryTarget2}
             onChange={this.onChangeTarget2}
@@ -341,7 +341,7 @@ export default class LogForm extends Component {
         <section>
           <label>Entry T3 Price: </label>
           <input
-            type='number'
+            type="number"
             required
             value={this.state.entryTarget3}
             onChange={this.onChangeTarget3}
@@ -351,7 +351,7 @@ export default class LogForm extends Component {
         <section>
           <label>S/L Price: </label>
           <input
-            type='number'
+            type="number"
             required
             value={this.state.stopLoss}
             onChange={this.onChangeStopLoss}
@@ -364,7 +364,7 @@ export default class LogForm extends Component {
           <label>Exit Date: </label>
           <div className={styles.DatePicker}>
             <input
-              type='date'
+              type="date"
               required
               value={this.state.exitDate}
               onChange={this.onChangeExitDate}
@@ -376,7 +376,7 @@ export default class LogForm extends Component {
           <label>Exit Time: </label>
           <div className={styles.TimePicker}>
             <input
-              type='time'
+              type="time"
               required
               value={this.state.exitTime}
               onChange={this.onChangeExitTime}
@@ -387,7 +387,7 @@ export default class LogForm extends Component {
         <section>
           <label>Exit T1 Price: </label>
           <input
-            type='number'
+            type="number"
             required
             value={this.state.exitTarget1}
             onChange={this.onChangeExitTarget1}
@@ -397,7 +397,7 @@ export default class LogForm extends Component {
         <section>
           <label>Exit T2 Price: </label>
           <input
-            type='number'
+            type="number"
             required
             value={this.state.exitTarget2}
             onChange={this.onChangeExitTarget2}
@@ -407,7 +407,7 @@ export default class LogForm extends Component {
         <section>
           <label>Exit T3 Price: </label>
           <input
-            type='number'
+            type="number"
             required
             value={this.state.exitTarget3}
             onChange={this.onChangeExitTarget3}
@@ -419,7 +419,7 @@ export default class LogForm extends Component {
         <section>
           <label>MAE: </label>
           <input
-            type='number'
+            type="number"
             required
             value={this.state.MAE}
             onChange={this.onChangeMAE}
@@ -429,7 +429,7 @@ export default class LogForm extends Component {
         <section>
           <label>X Price: </label>
           <input
-            type='number'
+            type="number"
             required
             value={this.state.pointX}
             onChange={this.onChangePointX}
@@ -439,7 +439,7 @@ export default class LogForm extends Component {
         <section>
           <label>A Price: </label>
           <input
-            type='number'
+            type="number"
             required
             value={this.state.pointA}
             onChange={this.onChangePointA}
@@ -452,8 +452,8 @@ export default class LogForm extends Component {
           <label></label>
           <input
             className={styles.Button}
-            type='submit'
-            value='Submit'
+            type="submit"
+            value="Submit"
             onChange={this.onSubmit}
           />
         </section>
